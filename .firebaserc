@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "nextgen-cc24d": {
+      "hosting": {
+        "OnlineShoppingCart": [
+          "nextgen-cc24d"
+        ]
+      }
+    }
+  }
+}
