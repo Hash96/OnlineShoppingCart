@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import 'firebase/firestore';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'OnlineShoppingCart';
+
+  items;
+
+  constructor(private firestore: AngularFirestore) {
+    this.items = firestore.collection('items').valueChanges().subscribe(res => {
+      this.items = res;
+      console.log(this.items);
+    }, err => {
+      console.log(err);
+    });
+  }
 }
