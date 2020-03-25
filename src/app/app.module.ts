@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './modules/navbar/navbar.component';
 import { MatModule } from './core/mat/mat.module';
 import { ChatComponent } from './modules/chat/chat.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ChatComponent } from './modules/chat/chat.component';
     MatModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAnalyticsModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
