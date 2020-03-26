@@ -7,6 +7,7 @@ import { Chat } from '../models/Chat';
   providedIn: 'root'
 })
 export class ChatService {
+  messages;
 
   constructor(private db:AngularFirestore) { }
 
@@ -18,6 +19,14 @@ export class ChatService {
       fromUser:chatModel.fromUser
     });
     console.log(x);
+    this.getMessages();
+  }
+
+  getMessages(){
+    this.messages = this.db.collection('chats').doc('4rH0lOOUgxFy0uZCyHUE').collection('messages',ref=>ref.orderBy('createdAt')).valueChanges();
+    //console.log(this.messages);
+    return this.messages;
+
   }
 
 

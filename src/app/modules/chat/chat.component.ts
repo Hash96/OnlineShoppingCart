@@ -11,16 +11,30 @@ import { ChatService } from 'src/app/core/services/chat.service';
 export class ChatComponent implements OnInit {
 
   chatModel = new Chat;
+  Messages;
   
   constructor(private _chatService:ChatService) { }
 
   ngOnInit(): void {
+    this.getMessages();
   }
 
   send(){
-    this.chatModel.fromUser = true;
+    this.chatModel.fromUser = false;
     this.chatModel.createdAt = new Date;
     this._chatService.addMessage(this.chatModel);
+    this.chatModel.body = ' ';
+   
   }
+ getMessages(){
+  this._chatService.getMessages().subscribe(
+    res=>{
+      this.Messages = res;
+      console.log(this.Messages);     
+  }, err => {
+    console.log(err);
+  })
+ }
+
 
 }
