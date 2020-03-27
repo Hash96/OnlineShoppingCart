@@ -34,7 +34,7 @@ body {
 
 .messages-box,
 .chat-box {
-  height: 250px;
+  height: 300px;
   width: 320px;
   overflow-y: scroll;
 }
@@ -52,6 +52,31 @@ input::placeholder {
   border-radius: 8px;
 }
 
-.messageText{
-  overflow-wrap: anywhere;
+.msg_cotainer{
+  border-radius: 10px;
+  position: relative;
+  overflow-wrap: anywhere; 
+  max-width: 200px;
+}
+.msg_cotainer_send{
+  border-radius: 10px;
+  position: relative;
+  overflow-wrap: anywhere; 
+  max-width: 200px;
+}
+.msg_time{
+  position: absolute;
+  left: 20px;
+  bottom: -20px;
+  width: 150px;
+}
+.msg_time_send{
+  position: absolute;
+  right:0px;
+  bottom: -20px;
+  width: 150px;
+}
+.bi-dash{
+  float: right;
+  margin-bottom: 1;
 }

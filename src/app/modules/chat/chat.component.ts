@@ -12,15 +12,21 @@ export class ChatComponent implements OnInit {
 
   chatModel = new Chat;
   Messages;
+  collapse:boolean=false;
+  term =0;
   
   constructor(private _chatService:ChatService) { }
 
   ngOnInit(): void {
     this.getMessages();
   }
+  changeCollapse(){
+    this.collapse = !this.collapse;
+    
+  }
 
   send(){
-    this.chatModel.fromUser = false;
+    this.chatModel.fromUser = true;
     this.chatModel.createdAt = new Date;
     this._chatService.addMessage(this.chatModel);
     this.chatModel.body = ' ';
@@ -36,5 +42,6 @@ export class ChatComponent implements OnInit {
   })
  }
 
+ 
 
 }
