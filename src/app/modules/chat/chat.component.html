@@ -1,0 +1,49 @@
+<div class="d-flex flex-row-reverse row fixed-bottom mr-5" >
+  <div class=" m-0 p-0" style="height: 30px; width:200px; " *ngIf="this.collapse == false"> 
+    <button type="button" class="btn btn-primary btn-sm btn-block " (click)="changeCollapse();" >Chat with NextGen</button>
+  </div>
+  <div style="box-shadow: 0px 0px 5px grey; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden;" *ngIf="this.collapse == true" >
+    <div class=" m-0 p-0" style="height: 30px; width:320px; "> 
+      <button type="button" class="btn btn-primary btn-sm btn-block " (click)="changeCollapse();" >Chat with NextGen</button>
+    </div>
+    <div class="px-1 py-5 chat-box bg-white">
+      <div *ngIf="Messages?.length>0">
+        <div *ngFor="let message of Messages" [ngSwitch]="message.fromUser">
+          <ng-container *ngSwitchCase="true">
+            <!-- Sender Message-->
+            <div class="d-flex justify-content-end mb-4">
+              <div class="msg_cotainer_send mr-1 my-auto p-2 text-white bg-primary">
+                {{message.body}}
+                <span class="msg_time_send text-muted small">{{message.createdAt.toDate() | date:'medium'}}</span>
+              </div>
+              <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user"
+                width="40" class="rounded-circle">
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="false">
+            <!-- Reciever Message-->
+            <div class="d-flex justify-content-start mb-4">
+              <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user"
+                width="40" class="rounded-circle">
+              <div class="msg_cotainer ml-1 my-auto p-2 bg-light">
+                {{message.body}}
+                <span class="msg_time text-muted small">{{message.createdAt.toDate() | date:'medium'}}</span>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <!-- Typing area -->
+    <form action="#" class="bg-light" (ngSubmit)="send();">
+      <div class="input-group m-1 w-auto p-0 m-0" style="min-height:1px position-relative" >
+        <input type="text" placeholder="Type a message" aria-label="Small"
+          aria-describedby="button-addon2 inputGroup-sizing-sm" class="form-control bg-light m-1 p-0.1"
+          [(ngModel)]="this.chatModel.body" [ngModelOptions]="{standalone: true}">
+        <div class="input-group-append">
+          <button id="button-addon2" type="submit" class="btn btn-primary btn-sm m-1"> Snd</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
