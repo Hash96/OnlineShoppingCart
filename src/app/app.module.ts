@@ -13,13 +13,15 @@ import { NavbarComponent } from './modules/navbar/navbar.component';
 import { MatModule } from './core/mat/mat.module';
 import { ChatComponent } from './modules/chat/chat.component';
 import { FormsModule } from '@angular/forms';
+import { OrderListComponent } from './modules/orders/order-list/order-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    ChatComponent
+    ChatComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule,
