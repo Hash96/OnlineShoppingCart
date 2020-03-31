@@ -14,6 +14,7 @@ import { MatModule } from './core/mat/mat.module';
 import { ChatComponent } from './modules/chat/chat.component';
 import { FormsModule } from '@angular/forms';
 import { OrderListComponent } from './modules/orders/order-list/order-list.component';
+import { OrderDetailsComponent } from './modules/orders/order-details/order-details.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { OrderListComponent } from './modules/orders/order-list/order-list.compo
     AppComponent,
     NavbarComponent,
     ChatComponent,
-    OrderListComponent
+    OrderListComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,
