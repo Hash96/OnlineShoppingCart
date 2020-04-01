@@ -15,6 +15,7 @@ import { ChatComponent } from './modules/chat/chat.component';
 import { FormsModule } from '@angular/forms';
 import { OrderListComponent } from './modules/orders/order-list/order-list.component';
 import { OrderDetailsComponent } from './modules/orders/order-details/order-details.component';
+import { AuthComponent } from './modules/auth/auth.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { OrderDetailsComponent } from './modules/orders/order-details/order-deta
     NavbarComponent,
     ChatComponent,
     OrderListComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
