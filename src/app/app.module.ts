@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { OrderListComponent } from './modules/orders/order-list/order-list.component';
 import { OrderDetailsComponent } from './modules/orders/order-details/order-details.component';
 import { AuthComponent } from './modules/auth/auth.component';
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { AuthComponent } from './modules/auth/auth.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [],
   bootstrap: [AppComponent]
