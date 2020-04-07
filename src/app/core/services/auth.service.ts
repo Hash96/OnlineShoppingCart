@@ -1,23 +1,97 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import 'firebase/firestore';
 import { auth } from 'firebase/app';
+
+import { AngularFireAuth } from "@angular/fire/auth";
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  user;
 
-  constructor(public authf: AngularFireAuth) { }
+  userData: Observable<firebase.User>;
 
+  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
+    this.userData = afAuth.authState;
+  }
+
+  getCurrentUser() {
+    let user = this.afAuth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log(user.email);
+        console.log(user.displayName);
+        console.log(user.uid);
+        console.log(user.providerData);
+        console.log(user.photoURL);
+      } else {
+        console.log('No user logged in');
+      }
+    });
+  }
+
+  // google
   login() {
-    this.user= this.authf.signInWithPopup(new auth.GoogleAuthProvider());
-    console.log("ppppppppppppppppppp");
-    console.log(this.user);
-    return this.user;
+    this.afAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(user => {
+      // console.log(user);
+    });
+    let xo = this.afAuth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log(user);
+        console.log(user.displayName);
+        console.log(user.uid);
+        console.log(user.providerData);
+        console.log(user.photoURL);
+        let x = this.db.collection('users').doc(user.uid).set({
+          name: user.displayName,
+          email: user.email,
+          contact: user.phoneNumber,
+          profile: user.photoURL
+        })
+      } else {
+        console.log('No user logged in');
+      }
+      console.log(xo);
+    });
   }
-  logout() {
-    this.authf.signOut();
+
+
+
+  /* Sign up */
+  SignUp(email: string, password: string) {
+
+    this.afAuth
+      .createUserWithEmailAndPassword("qwerty@uiop.com", "password")
+      .then(res => {
+        console.log('Successfully signed up!', res);
+      })
+      .catch(error => {
+        console.log('Something is wrong:', error.message);
+      });
   }
+
+  /* Sign in */
+  SignIn(email: string, password: string) {
+    this.afAuth
+      .signInWithEmailAndPassword("qwerty@uiop.com", "password")
+      .then(res => {
+        console.log('Successfully signed in!');
+        console.log(res);
+
+      })
+      .catch(err => {
+        console.log('Something is wrong:', err.message);
+      });
+  }
+
+  /* Sign out */
+  SignOut() {
+    this.afAuth
+      .signOut();
+  }
+
+
+
 
 }

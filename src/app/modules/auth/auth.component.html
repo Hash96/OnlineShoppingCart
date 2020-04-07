@@ -1,4 +1,4 @@
-<div class="container mt-7">
+<!-- <div class="container mt-7">
     <div *ngIf="auth?.user | async as user; else showLogin">
         <h1>Hello {{ user.displayName }}!</h1>
         <button (click)="logoutUser()">Logout</button>
@@ -7,4 +7,25 @@
         <p>Please login.</p>
         <button (click)="loginUser()">Login with Google</button>
     </ng-template>
+</div> -->
+
+<div *ngIf="authService.userData | async; else showLogin">
+    <p>Hello {{ (authService.userData | async)?.photoURL }}!</p>
+    <!-- <p>{{user.uid}}</p> -->
+    <button (click)="logout()">Logout</button>
 </div>
+<ng-template #showLogin>
+    <p>Please login.</p>
+    <button class="loginBtn loginBtn--google" (click)="login()">
+        Login with Google
+      </button>
+</ng-template>
+
+<br><br><br>
+
+
+
+  
+
+<!-- <button (click)="signUp()">Normal signup</button> -->
+<!-- <button (click)="signIn()">Normal signin</button> -->
