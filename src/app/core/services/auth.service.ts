@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
-import { auth } from 'firebase/app';
-
+import { auth, User } from 'firebase/app';
+import { Customer } from '../models/Customer';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable } from 'rxjs';
 
@@ -11,14 +11,17 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  userData: Observable<firebase.User>;
+  userData: Observable<Customer>;
+  currentUser;
 
-  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
+  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.userData = afAuth.authState;
   }
 
   getCurrentUser() {
-    let user = this.afAuth.onAuthStateChanged((user) => {
+    let x = this.afAuth.onAuthStateChanged((user) => {
+      this.currentUser = user;
+      console.log('jjj', this.currentUser);
       if (user) {
         console.log(user.email);
         console.log(user.displayName);
@@ -29,32 +32,43 @@ export class AuthService {
         console.log('No user logged in');
       }
     });
+    // x = this.currentUser;
+    return x;
   }
 
   // google
+  // login() {
+  //   this.afAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(credential => {
+  //     if (credential.user) {
+  //       console.log('cred', credential.user);
+  //       this.currentUser = credential.user;
+  //       this.afs.collection('users').doc(credential.user.uid).valueChanges()
+  //         .subscribe(cred => {
+  //           console.log("fffffff", cred);
+  //           if (!cred) {
+  //             console.log("yyyyyyyyyy");
+  //             this.afs.collection('users').doc(credential.user.uid).set({
+  //               name: credential.user.displayName,
+  //               email: credential.user.email,
+  //               contact: credential.user.phoneNumber,
+  //               profile: credential.user.photoURL
+  //             })
+  //           }
+  //           if (cred) {
+  //             console.log("ttttttttttttttt");
+  //           }
+
+  //         })
+  //     }
+  //   });
+  // }
+
   login() {
-    this.afAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(user => {
-      // console.log(user);
-    });
-    let xo = this.afAuth.onAuthStateChanged((user) => {
-      if (user) {
-        console.log(user);
-        console.log(user.displayName);
-        console.log(user.uid);
-        console.log(user.providerData);
-        console.log(user.photoURL);
-        let x = this.db.collection('users').doc(user.uid).set({
-          name: user.displayName,
-          email: user.email,
-          contact: user.phoneNumber,
-          profile: user.photoURL
-        })
-      } else {
-        console.log('No user logged in');
-      }
-      console.log(xo);
-    });
+    let cred = this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
+    return cred;
+
   }
+
 
 
 
@@ -91,7 +105,41 @@ export class AuthService {
       .signOut();
   }
 
+  test() {
+    // var docRef = db.collection("cities").doc("SF");
 
+    // docRef.get().then(function (doc) {
+    //   if (doc.exists) {
+    //     console.log("Document data:", doc.data());
+    //   } else {
+    //     // doc.data() will be undefined in this case
+    //     console.log("No such document!");
+    //   }
+    // }).catch(function (error) {
+    //   console.log("Error getting document:", error);
+    // });
+    // let docRef = this.afs.collection('users',ref=>ref.where('email','==','hjhfhfuhiuhfdi')).valueChanges();
+    let docRef = this.afs.collection('users').doc('N7oKhTOH22hXyOmW1dsPxnOXA4Z1').valueChanges();
+    return docRef;
+  }
+
+
+  checkDb(uid) {
+    let docRef = this.afs.collection('users').doc(uid).valueChanges();
+    return docRef;
+  }
+  addUser(id, user) {
+    console.log("pppppppppppppppppppp");
+    this.afs.collection('users').doc(id).set({
+      name: user.displayName,
+      email: user.email,
+      contact: user.phoneNumber,
+      profile: user.photoURL
+    });
+  }
 
 
 }
+
+
+

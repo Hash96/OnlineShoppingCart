@@ -20,26 +20,27 @@ export class AuthComponent implements OnInit {
 
   // loginUser(){
   //  this._authService.login();
-    
+
   // }
 
   // logoutUser(){
   //   this._authService.logout();
-    
+
   // }
 
   email: string;
   password: string;
   uid;
-  user;
+  currentUser;
   
-  constructor( public authService:AuthService) {
+
+  constructor(public authService: AuthService) {
   }
 
   ngOnInit() {
-    this.authService.getCurrentUser();
-    console.log(this.authService.userData);
-    
+    // this.authService.getCurrentUser()
+    // console.log(this.authService.userData);
+
   }
 
   // getCurrentUser() {
@@ -57,10 +58,35 @@ export class AuthComponent implements OnInit {
   // }
 
   login() {
-    this.authService.login();
-    console.log(this.authService.userData);
+    this.authService.login().then((res) => {
+      console.log('ccccccccccccccccc', res.user.uid);
+      this.checkDb(res.user);
+      this.currentUser = res.user;
+    });
   }
+
+  checkDb(user) {
+    this.authService.checkDb(user.uid).subscribe(
+      res => {
+        console.log('check',res);
+        if(!res){
+          console.log('no res');
+          console.log(this.currentUser.uid);
+         
+        }else{
+          
+        }
+      }
+    )
+  }
+
+insertUser(){
+  this.authService.addUser(this.currentUser.uid,this.currentUser);
+  
+}
+
   logout() {
+
     this.authService.SignOut();
   }
 
@@ -68,14 +94,14 @@ export class AuthComponent implements OnInit {
 
   signUp() {
     this.authService.SignUp(this.email, this.password);
-    this.email = ''; 
+    this.email = '';
     this.password = '';
-    
+
   }
 
   signIn() {
     this.authService.SignIn(this.email, this.password);
-    this.email = ''; 
+    this.email = '';
     this.password = '';
   }
 
@@ -83,5 +109,14 @@ export class AuthComponent implements OnInit {
     this.authService.SignOut();
   }
 
+  test(user) {
+    console.log('user', user);
+    this.authService.test().subscribe(
+      res => {
+        console.log(res);
+      }
+    );
+
+  }
 
 }

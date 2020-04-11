@@ -1,31 +1,50 @@
-<!-- <div class="container mt-7">
-    <div *ngIf="auth?.user | async as user; else showLogin">
-        <h1>Hello {{ user.displayName }}!</h1>
-        <button (click)="logoutUser()">Logout</button>
-      </div>
+<div class="container  m-5 row">
+    <div class="col-8 border">
+        <h1 class="text-center mb-0 mt-3"><b>Welcome To NextGen</b></h1>
+        <p class="text-center">Sign in or <a class="text-primary" href="#">Create an Account</a></p>
+        <div class="m-5 mt-10 row">
+            <div class="border-right border-dark m-3 pr-5 col-6">
+                <mat-form-field appearance="fill" class="mx-auto" >
+                    <mat-label >Email</mat-label>
+                    <input matInput>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput>
+                </mat-form-field>
+                <button class="btn btn-primary btn-block mr-7">Sign In</button>
+            </div>
+            <div>
+                <button class="loginBtn loginBtn--google mt-5 ml-3" (click)="login()">
+                    Login with Google
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- <div >
+    <div *ngIf="authService.userData | async as user; else showLogin">
+       <div>
+        <p>Hello {{ user?.displayName }}!</p>
+        
+        <button (click)="logout()">Logout</button>
+       </div>
+    </div>
     <ng-template #showLogin>
         <p>Please login.</p>
-        <button (click)="loginUser()">Login with Google</button>
+        <button class="loginBtn loginBtn--google" (click)="login()">
+            Login with Google
+          </button>
     </ng-template>
 </div> -->
-
-<div *ngIf="authService.userData | async; else showLogin">
-    <p>Hello {{ (authService.userData | async)?.photoURL }}!</p>
-    <!-- <p>{{user.uid}}</p> -->
-    <button (click)="logout()">Logout</button>
-</div>
-<ng-template #showLogin>
-    <p>Please login.</p>
-    <button class="loginBtn loginBtn--google" (click)="login()">
-        Login with Google
-      </button>
-</ng-template>
-
-<br><br><br>
-
-
-
-  
-
 <!-- <button (click)="signUp()">Normal signup</button> -->
 <!-- <button (click)="signIn()">Normal signin</button> -->
