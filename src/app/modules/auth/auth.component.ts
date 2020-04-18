@@ -4,7 +4,9 @@ import { auth } from 'firebase/app';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { async } from '@angular/core/testing';
-
+import { Router } from '@angular/router';
+import {Customer} from '../../core/models/Customer';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -32,9 +34,11 @@ export class AuthComponent implements OnInit {
   password: string;
   uid;
   currentUser;
+  signupModel: Observable<Customer>;
+  
   
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService,private router:Router) {
   }
 
   ngOnInit() {
@@ -72,7 +76,8 @@ export class AuthComponent implements OnInit {
         if(!res){
           console.log('no res');
           console.log(this.currentUser.uid);
-         
+          this.insertUser();
+          this.router.navigate(['/']);
         }else{
           
         }
@@ -107,6 +112,7 @@ insertUser(){
 
   signOut() {
     this.authService.SignOut();
+   
   }
 
   test(user) {

@@ -13,6 +13,7 @@ export class AuthService {
 
   userData: Observable<Customer>;
   currentUser;
+  User;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.userData = afAuth.authState;
@@ -68,9 +69,6 @@ export class AuthService {
     return cred;
 
   }
-
-
-
 
   /* Sign up */
   SignUp(email: string, password: string) {

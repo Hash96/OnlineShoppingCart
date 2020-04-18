@@ -1,6 +1,7 @@
 export interface Customer{
-    Name?: string;
+    name?: string;
     email: string;
+    password? : string;
     photoURL?: string;
 
 }

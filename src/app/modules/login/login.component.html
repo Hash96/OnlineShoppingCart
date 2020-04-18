@@ -1,0 +1,53 @@
+<div class="container  m-5 row"  *ngIf="signUp == false">
+    <div class="col-8 border">
+        <h1 class="text-center mb-0 mt-3"><b>Welcome To NextGen</b></h1>
+        <p class="text-center">Sign in or <a type="button" class="text-primary " (click)="moveSignUp();" >Create an Account</a></p>
+        <div class="m-5 mt-10 row">
+            <div class="border-right border-dark m-3 pr-5 col-6">
+                <mat-form-field appearance="fill" class="mx-auto" >
+                    <mat-label >Email</mat-label>
+                    <input matInput>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput>
+                </mat-form-field>
+                <button class="btn btn-primary btn-block mr-7">Sign In</button>
+            </div>
+            <div>
+                <button class="loginBtn loginBtn--google mt-5 ml-3" >
+                    Login with Google
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="signUp==true">
+    <div class="container  m-5 row">
+        <div class="col-8 border">
+            <h1 class="text-center mb-0 mt-3"><b>Welcome To NextGen</b></h1>
+            <div class="m-5 mt-10 row">
+                <div class="border-right border-dark m-3 pr-5 col-6">
+                    <mat-form-field appearance="fill" class="mx-auto" >
+                        <mat-label >Email</mat-label>
+                        <input matInput name="email" >
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input matInput name="password">
+                    </mat-form-field>
+                    <button class="btn btn-primary btn-block mr-7">Sign Up</button>
+                </div>
+                <div>
+                    <button class="loginBtn loginBtn--google mt-5 ml-3" >
+                        Continue with Google
+                      </button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <p class="text-center">Are you already a member? <a type="button" class="text-primary " (click)="moveSignIn();" >Sign In</a></p>
+        </div>
+    </div>
+</div>

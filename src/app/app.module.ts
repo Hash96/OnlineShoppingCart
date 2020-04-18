@@ -18,6 +18,8 @@ import { OrderListComponent } from './modules/orders/order-list/order-list.compo
 import { OrderDetailsComponent } from './modules/orders/order-details/order-details.component';
 import { AuthComponent } from './modules/auth/auth.component';
 import { ToastrModule } from 'ngx-toastr';
+import { LoginComponent } from './modules/login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ToastrModule } from 'ngx-toastr';
     ChatComponent,
     OrderListComponent,
     OrderDetailsComponent,
-    AuthComponent
+    AuthComponent,
+    LoginComponent,
+ 
   ],
   imports: [
     BrowserModule,
