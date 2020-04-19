@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/core/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
   signUp=false;
-  constructor() { }
+  constructor(public _userService:UserService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -21,5 +23,15 @@ export class LoginComponent implements OnInit {
     this.signUp=false;
     console.log("iiiiiiiiiiiiiii");
   }
+
+  onGoogleLogin(){
+    this._userService.googleLogin().then(
+      (res)=>{
+        this.router.navigate(['/']);
+      }
+    )
+  }
+
+ 
 
 }

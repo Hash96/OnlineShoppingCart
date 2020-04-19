@@ -4,18 +4,20 @@
         <p class="text-center">Sign in or <a type="button" class="text-primary " (click)="moveSignUp();" >Create an Account</a></p>
         <div class="m-5 mt-10 row">
             <div class="border-right border-dark m-3 pr-5 col-6">
-                <mat-form-field appearance="fill" class="mx-auto" >
-                    <mat-label >Email</mat-label>
-                    <input matInput>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Password</mat-label>
-                    <input matInput>
-                </mat-form-field>
-                <button class="btn btn-primary btn-block mr-7">Sign In</button>
+                <form >
+                    <mat-form-field appearance="fill" class="mx-auto" >
+                        <mat-label >Email</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <button class="btn btn-primary btn-block mr-7">Sign In</button>
+                </form>
             </div>
             <div>
-                <button class="loginBtn loginBtn--google mt-5 ml-3" >
+                <button class="loginBtn loginBtn--google mt-5 ml-3" (click)="onGoogleLogin();">
                     Login with Google
                   </button>
             </div>
@@ -51,3 +53,6 @@
         </div>
     </div>
 </div>
+
+
+

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,9 +10,10 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
- constructor(private toastr: ToastrService,private router:Router) { }
+ constructor(private toastr: ToastrService,private router:Router,public _userService:UserService) { }
 
   ngOnInit(): void {
+    this._userService.getCurrentUser();
   }
   
   showSuccess() {
@@ -20,6 +22,14 @@ export class NavbarComponent implements OnInit {
 
   signIn(){
     this.router.navigate(['/signin']);
+  }
+  onLogout(){
+    console.log("uuuuuuuuuuuuuu");
+    this._userService.logout().then(
+      (res)=>{
+        this.router.navigate(['/']);
+      }
+    )
   }
 
 }

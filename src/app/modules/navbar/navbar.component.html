@@ -4,10 +4,14 @@
     </div>
     <div>
         <span>Clothing</span>
-        <button class="btn btn-light btn-sm" (click)="signIn();">Sign in</button>
         
     </div>
 </mat-toolbar>
+<button class="btn btn-light btn-sm" *ngIf="!_userService.user" (click)="signIn();">Sign in</button>
+<div *ngIf="_userService.user">
+    <p >{{ _userService.user.Name }} </p>
+    <button (click)="onLogout();">Logout</button>
+</div>
 <!-- <div class="mt-5">
     <button (click)="showSuccess();" >gt</button>
 </div> -->

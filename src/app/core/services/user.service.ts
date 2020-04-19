@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/firestore";
 import "firebase/firestore";
 import { auth } from "firebase/app";
-import { AngularFireAuth } from '@angular/fire/auth/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +32,9 @@ export class UserService {
       }
     )
   }
-//sign in with google
+//google
   googleLogin(){
-    this.afAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(
+    let x= this.afAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(
       (cred)=>{
         if(cred.user){
           this.db.collection("users").doc(cred.user.uid).valueChanges().subscribe(
@@ -54,5 +54,19 @@ export class UserService {
         }
       }
     )
+    return x;
   }
+
+//logout
+logout(){
+  let x = this.afAuth.signOut(); 
+  console.log("ppppp");
+  this.user = null;
+  return x;
+}
+
+//sign up
+signUp(){
+
+}
 }
