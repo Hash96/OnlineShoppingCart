@@ -64,3 +64,8 @@ body { padding: 2em; }
 .loginBtn--google:focus {
   background: #E74B37;
 }
+
+
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
